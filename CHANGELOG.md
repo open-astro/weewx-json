@@ -4,12 +4,14 @@ All notable changes to WeeWX-JSON will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.4] - 2026-02-05
 - Added new `lcd_datasheet.json` output template for NOAA-style layered reporting.
 - Included 15-minute raw captures for daily rows in `lcd_datasheet.json`.
 - Added aggregated summaries to limit file growth: weekly/monthly daily summaries and yearly monthly summaries.
 - Updated `skin.conf` to generate `lcd_datasheet.json` without changing existing `weewx.json` or `current_minimal.json`.
-- Updated `README.md` generated-file documentation for the new output.
+- Updated `README.md` with new output details, report regeneration, and packaging guidance.
+- Updated installer template to register the extension as `weewx-json`.
+- Ignored macOS metadata files in `.gitignore`.
 
 ## [1.3] - 2024-10-30
 - Fixed template comparisons to avoid literal-comparison warnings.

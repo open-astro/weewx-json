@@ -1,21 +1,49 @@
 # WeeWX-JSON
-Extension for JSON output from WeeWX
+Extension for JSON output from WeeWX 5.2
 
-This extension provides a skin that is not designed to be used from a web browser, rather for consumption from another
-type of client...smartphone app, dynamic javascript page, automated bot.
+This extension provides a skin intended for non-browser clients such as smartphone apps, dynamic JavaScript pages,
+or automated bots.
 
-This is most of the same data that can be found in the default "Seasons" report's `rss.xml` output, but formatted in
-the JSON format for easier consumption by clients.
+It mirrors most of the data found in the default "Seasons" report `rss.xml` while adding JSON outputs tailored for
+automation, including NOAA-style layered reporting with 15-minute captures and aggregated daily/monthly summaries.
 
 
 ## Installing
 
-Download the latest release from the [github releases](https://github.com/open-astro/WeeWX-JSON/releases) page
+Download the latest release from the [github releases](https://github.com/open-astro/weewx-json/releases) page
 
-Run `weectl extension install WeeWX-JSON_X.X.tar.gz`
+Run `weectl extension install weewx-json_X.X.tar.gz`
 
 This will automatically add a `[[JSONReport]]` to your weewx.conf file that will include the `weewx.json` in your 
 `HTML_ROOT`. 
+
+To regenerate reports from existing archive data, you can run:
+
+```sh
+sudo weectl report run
+```
+
+## Packaging local changes
+
+If you are modifying the extension locally, use the packaging script to ensure `install.py` is included at the
+top level of the archive:
+
+```sh
+python3 build_package.py --set-version 1.4
+```
+
+This creates `dist/weewx-json_1.4.tar.gz`, which you can install with `weectl extension install`.
+
+On macOS, confirm you copied the `dist` tarball (not a repo archive) before installing on Linux:
+
+```sh
+tar -tzf dist/weewx-json_1.4.tar.gz | head
+```
+
+You should see `weewx-json_1.4/install.py` at the top level.
+
+If you prefer to build the tarball manually, make sure it contains `install.py` at the top level (not the repo root),
+or the install will fail.
 
 ## Generated files
 
@@ -25,7 +53,7 @@ This will automatically add a `[[JSONReport]]` to your weewx.conf file that will
 
 ## Uninstalling
 
-Run `weectl extension uninstall WeeWX-JSON`
+Run `weectl extension uninstall weewx-json`
 
 ## Example Output
 
