@@ -1,0 +1,172 @@
+{
+    "station":
+    {
+        "location": "$station.location",
+        "latitude": $station.stn_info.latitude_f,
+        "longitude": $station.stn_info.longitude_f,
+        "altitude_meters": $station.altitude.meter.raw,
+        "link": "$station.station_url"
+    },
+    "generation":
+    {
+        #if $Extras.timestamp_fmt == "human"
+        "time": "$current.dateTime.format("%a, %d %b %Y %H:%M:%S %Z")",
+        #else
+        "time": "$current.dateTime.format("%Y-%m-%dT%H:%M:%S%z")",
+        #end if
+        "generator": "weewx $station.version"
+    },
+    "lcd_datasheet":
+    {
+        "daily_captures":
+        {
+            "interval_minutes": 15,
+            "fields": [
+                "timestamp_epoch",
+                "temperature",
+                "wind_direction",
+                "wind_speed",
+                "wind_gust",
+                "rain",
+                "rain_rate",
+                "humidity",
+                "barometer"
+            ],
+            "rows":
+            [
+                #set $first = 1
+                #for $row in $day.records
+                #if not $first
+                ,
+                #end if
+                [
+                    $row.dateTime.raw,
+                    $row.outTemp.raw,
+                    $row.windDir.raw,
+                    $row.windSpeed.raw,
+                    $row.windGust.raw,
+                    $row.rain.raw,
+                    $row.rainRate.raw,
+                    $row.outHumidity.raw,
+                    $row.barometer.raw
+                ]
+                #set $first = 0
+                #end for
+            ]
+        },
+        "weekly_daily_summaries":
+        [
+            #set $first = 1
+            #for $week_day in $week.days
+            #if not $first
+            ,
+            #end if
+            {
+                "period_start_epoch": $week_day.start.raw,
+                "period_end_epoch": $week_day.end.raw,
+                "temperature": {
+                    "min": $week_day.outTemp.min.raw,
+                    "max": $week_day.outTemp.max.raw,
+                    "avg": $week_day.outTemp.avg.raw
+                },
+                "humidity": {
+                    "min": $week_day.outHumidity.min.raw,
+                    "max": $week_day.outHumidity.max.raw,
+                    "avg": $week_day.outHumidity.avg.raw
+                },
+                "wind": {
+                    "speed_avg": $week_day.windSpeed.avg.raw,
+                    "speed_max": $week_day.windSpeed.max.raw,
+                    "gust_max": $week_day.windGust.max.raw
+                },
+                "barometer": {
+                    "min": $week_day.barometer.min.raw,
+                    "max": $week_day.barometer.max.raw,
+                    "avg": $week_day.barometer.avg.raw
+                },
+                "rain": {
+                    "total": $week_day.rain.sum.raw,
+                    "rate_max": $week_day.rainRate.max.raw
+                }
+            }
+            #set $first = 0
+            #end for
+        ],
+        "monthly_daily_summaries":
+        [
+            #set $first = 1
+            #for $month_day in $month.days
+            #if not $first
+            ,
+            #end if
+            {
+                "period_start_epoch": $month_day.start.raw,
+                "period_end_epoch": $month_day.end.raw,
+                "temperature": {
+                    "min": $month_day.outTemp.min.raw,
+                    "max": $month_day.outTemp.max.raw,
+                    "avg": $month_day.outTemp.avg.raw
+                },
+                "humidity": {
+                    "min": $month_day.outHumidity.min.raw,
+                    "max": $month_day.outHumidity.max.raw,
+                    "avg": $month_day.outHumidity.avg.raw
+                },
+                "wind": {
+                    "speed_avg": $month_day.windSpeed.avg.raw,
+                    "speed_max": $month_day.windSpeed.max.raw,
+                    "gust_max": $month_day.windGust.max.raw
+                },
+                "barometer": {
+                    "min": $month_day.barometer.min.raw,
+                    "max": $month_day.barometer.max.raw,
+                    "avg": $month_day.barometer.avg.raw
+                },
+                "rain": {
+                    "total": $month_day.rain.sum.raw,
+                    "rate_max": $month_day.rainRate.max.raw
+                }
+            }
+            #set $first = 0
+            #end for
+        ],
+        "yearly_monthly_summaries":
+        [
+            #set $first = 1
+            #for $year_month in $year.months
+            #if not $first
+            ,
+            #end if
+            {
+                "period_start_epoch": $year_month.start.raw,
+                "period_end_epoch": $year_month.end.raw,
+                "temperature": {
+                    "min": $year_month.outTemp.min.raw,
+                    "max": $year_month.outTemp.max.raw,
+                    "avg": $year_month.outTemp.avg.raw
+                },
+                "humidity": {
+                    "min": $year_month.outHumidity.min.raw,
+                    "max": $year_month.outHumidity.max.raw,
+                    "avg": $year_month.outHumidity.avg.raw
+                },
+                "wind": {
+                    "speed_avg": $year_month.windSpeed.avg.raw,
+                    "speed_max": $year_month.windSpeed.max.raw,
+                    "gust_max": $year_month.windGust.max.raw
+                },
+                "barometer": {
+                    "min": $year_month.barometer.min.raw,
+                    "max": $year_month.barometer.max.raw,
+                    "avg": $year_month.barometer.avg.raw
+                },
+                "rain": {
+                    "total": $year_month.rain.sum.raw,
+                    "rate_max": $year_month.rainRate.max.raw
+                }
+            }
+            #set $first = 0
+            #end for
+        ]
+    }
+}

@@ -4,7 +4,7 @@ import shutil
 import argparse
 import tarfile
 
-version = "0.0"
+version = "1.4"
 dist_path = "dist"
 
 def package_dir():
