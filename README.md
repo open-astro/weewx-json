@@ -61,19 +61,17 @@ You should see `weewx-conditions_1.4/install.py` at the top level.
 If you prefer to build the tarball manually, make sure it contains `install.py` at the top level (not the repo root),
 or the install will fail.
 
-## Generated files
-
-- `conditions_summary.json`: full current + period min/max summary output
-- `conditions_current.json`: compact current conditions
-- `conditions_dataset.json`: NOAA-style layered output (daily 15-minute captures + weekly/monthly daily summaries + yearly monthly summaries)
-
-If you are upgrading from earlier versions, update any consumers to the new filenames.
-
 ## Uninstalling
 
 Run `weectl extension uninstall weewx-conditions`
 
 ## Template Breakdown
+
+### Generated files
+
+- `conditions_current.json`: compact current conditions (daily 15-minute captures)
+- `conditions_summary.json`: full current + period min/max summary output (daily 15-minute captures + weekly/monthly daily summaries + yearly monthly summaries)
+- `conditions_dataset.json`: NOAA-style layered output (daily 15-minute captures + weekly/monthly daily summaries + yearly monthly summaries)
 
 ### `conditions_current.json`
 
@@ -99,8 +97,7 @@ Includes:
 
 - `station` (location, latitude, longitude, altitude (meters), link)
 - `generation` (time, generator)
-- `current` (values below)
-- `day`, `week`, `month`, `year` (summary values below)
+- `current`, `day`, `week`, `month`, `year` (summary values below)
 
 Current conditions values (when available):
 
@@ -116,8 +113,6 @@ Current conditions values (when available):
 - `rain rate`
 - `inside temperature`
 - `inside humidity`
-`day`, `week`, `month`, and `year` summary values (when available):
-
 - `max temperature` (value, units, at)
 - `min temperature` (value, units, at)
 - `max dewpoint` (value, units, at)
@@ -143,7 +138,7 @@ Includes:
 
 - `station` (location, latitude, longitude, altitude_meters, link)
 - `generation` (time, generator)
-- `lcd_datasheet` (sections below)
+- `current`, `day`, `week`, `month`, `year` (values below)
 
 Current conditions values (when available):
 
@@ -156,8 +151,6 @@ Current conditions values (when available):
 - `extraTemp1`
 - `extraTemp2`
 - `extraTemp3`
-`daily_captures` fields (15-minute rows):
-
 - `timestamp_epoch`
 - `temperature`
 - `wind_direction`
@@ -169,8 +162,6 @@ Current conditions values (when available):
 - `dewpoint`
 - `wind_chill`
 - `barometer`
-`weekly_daily_summaries`, `monthly_daily_summaries`, and `yearly_monthly_summaries` include:
-
 - `period_start_epoch`
 - `period_end_epoch`
 - `temperature` (min/max/avg)
