@@ -1,8 +1,18 @@
 # Changelog
-All notable changes to WeeWX-JSON will be documented in this file.
+All notable changes to WeeWX-Conditions will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.5] - 2026-02-05
+- Renamed JSON outputs to be more descriptive: `weewx.json` -> `conditions_summary.json`, `current_minimal.json` -> `conditions_current.json`, `lcd_datasheet.json` -> `conditions_dataset.json`.
+- Renamed the extension to `weewx-conditions` with a `Conditions` skin and `ConditionsReport` config stanza.
+- Updated skin configuration and packaging to use the new template names.
+- Expanded `lcd_datasheet.json` current section with outTemp, outHumidity, dewpoint, wind_speed, wind_chill, barometer, and extraTemp1/2/3 (all with `has_data` checks).
+- Added dewpoint and wind_chill to `lcd_datasheet.json` daily_captures (fields and rows).
+- Added dewpoint and wind_chill to weekly_daily_summaries, monthly_daily_summaries, and yearly_monthly_summaries in `lcd_datasheet.json`.
+- Fixed `lcd_datasheet.json` template: use single-quoted format strings in generation time and in `.format()` for Cheetah/JSON compatibility.
+- Documented in README that the extension can be updated by reinstalling the tarball (no uninstall required).
 
 ## [1.4] - 2026-02-05
 - Added new `lcd_datasheet.json` output template for NOAA-style layered reporting.

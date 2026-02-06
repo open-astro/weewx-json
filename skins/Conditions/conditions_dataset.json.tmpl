@@ -10,14 +10,45 @@
     "generation":
     {
         #if $Extras.timestamp_fmt == "human"
-        "time": "$current.dateTime.format("%a, %d %b %Y %H:%M:%S %Z")",
+        "time": "$current.dateTime.format('%a, %d %b %Y %H:%M:%S %Z')",
         #else
-        "time": "$current.dateTime.format("%Y-%m-%dT%H:%M:%S%z")",
+        "time": "$current.dateTime.format('%Y-%m-%dT%H:%M:%S%z')",
         #end if
         "generator": "weewx $station.version"
     },
     "lcd_datasheet":
     {
+        "current":
+        {
+            #if $current.outTemp.has_data
+            "outTemp": {"value": $current.outTemp.raw, "units": "$current.outTemp.format(' ').lstrip()"},
+            #end if
+            #if $current.outHumidity.has_data
+            "outHumidity": {"value": $current.outHumidity.raw, "units": "$current.outHumidity.format(' ').lstrip()"},
+            #end if
+            #if $current.dewpoint.has_data
+            "dewpoint": {"value": $current.dewpoint.raw, "units": "$current.dewpoint.format(' ').lstrip()"},
+            #end if
+            #if $current.windSpeed.has_data
+            "wind_speed": {"value": $current.windSpeed.raw, "units": "$current.windSpeed.format(' ').lstrip()"},
+            #end if
+            #if $current.windchill.has_data
+            "wind_chill": {"value": $current.windchill.raw, "units": "$current.windchill.format(' ').lstrip()"},
+            #end if
+            #if $current.barometer.has_data
+            "barometer": {"value": $current.barometer.raw, "units": "$current.barometer.format(' ').lstrip()"},
+            #end if
+            #if $current.extraTemp1.has_data
+            "extraTemp1": {"value": $current.extraTemp1.raw, "units": "$current.extraTemp1.format(' ').lstrip()"},
+            #end if
+            #if $current.extraTemp2.has_data
+            "extraTemp2": {"value": $current.extraTemp2.raw, "units": "$current.extraTemp2.format(' ').lstrip()"},
+            #end if
+            #if $current.extraTemp3.has_data
+            "extraTemp3": {"value": $current.extraTemp3.raw, "units": "$current.extraTemp3.format(' ').lstrip()"},
+            #end if
+            "void_end": null
+        },
         "daily_captures":
         {
             "interval_minutes": 15,
@@ -30,6 +61,8 @@
                 "rain",
                 "rain_rate",
                 "humidity",
+                "dewpoint",
+                "wind_chill",
                 "barometer"
             ],
             "rows":
@@ -48,6 +81,8 @@
                     $row.rain.raw,
                     $row.rainRate.raw,
                     $row.outHumidity.raw,
+                    $row.dewpoint.raw,
+                    $row.windchill.raw,
                     $row.barometer.raw
                 ]
                 #set $first = 0
@@ -73,6 +108,16 @@
                     "min": $week_day.outHumidity.min.raw,
                     "max": $week_day.outHumidity.max.raw,
                     "avg": $week_day.outHumidity.avg.raw
+                },
+                "dewpoint": {
+                    "min": $week_day.dewpoint.min.raw,
+                    "max": $week_day.dewpoint.max.raw,
+                    "avg": $week_day.dewpoint.avg.raw
+                },
+                "wind_chill": {
+                    "min": $week_day.windchill.min.raw,
+                    "max": $week_day.windchill.max.raw,
+                    "avg": $week_day.windchill.avg.raw
                 },
                 "wind": {
                     "speed_avg": $week_day.windSpeed.avg.raw,
@@ -112,6 +157,16 @@
                     "max": $month_day.outHumidity.max.raw,
                     "avg": $month_day.outHumidity.avg.raw
                 },
+                "dewpoint": {
+                    "min": $month_day.dewpoint.min.raw,
+                    "max": $month_day.dewpoint.max.raw,
+                    "avg": $month_day.dewpoint.avg.raw
+                },
+                "wind_chill": {
+                    "min": $month_day.windchill.min.raw,
+                    "max": $month_day.windchill.max.raw,
+                    "avg": $month_day.windchill.avg.raw
+                },
                 "wind": {
                     "speed_avg": $month_day.windSpeed.avg.raw,
                     "speed_max": $month_day.windSpeed.max.raw,
@@ -149,6 +204,16 @@
                     "min": $year_month.outHumidity.min.raw,
                     "max": $year_month.outHumidity.max.raw,
                     "avg": $year_month.outHumidity.avg.raw
+                },
+                "dewpoint": {
+                    "min": $year_month.dewpoint.min.raw,
+                    "max": $year_month.dewpoint.max.raw,
+                    "avg": $year_month.dewpoint.avg.raw
+                },
+                "wind_chill": {
+                    "min": $year_month.windchill.min.raw,
+                    "max": $year_month.windchill.max.raw,
+                    "avg": $year_month.windchill.avg.raw
                 },
                 "wind": {
                     "speed_avg": $year_month.windSpeed.avg.raw,
