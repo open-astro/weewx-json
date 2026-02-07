@@ -6,7 +6,7 @@ The extension provides lightweight, non-browser-oriented outputs designed for co
 
 WeeWX-Conditions exposes environmental conditions using a clear and consistent data model, including:
 
-- **Current Conditions** – a real-time snapshot derived from the active archive interval  
+- **Conditions Current** – a real-time snapshot derived from the active archive interval  
 - **Conditions Summary** – daily, weekly, monthly, and yearly aggregates computed from archive records  
 - **Conditions Dataset** – time-series records and multi-period rollups suitable for visualization and analysis  
 
